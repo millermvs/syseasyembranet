@@ -1,0 +1,20 @@
+# Maven
+/target/
+
+# Eclipse / STS
+.classpath
+.project
+.factorypath
+.settings/
+.apt_generated
+.springBeans
+.sts4-cache
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Windows
+Thumbs.db
