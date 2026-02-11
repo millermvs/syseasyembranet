@@ -60,7 +60,12 @@
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-data-jpa</artifactId>
 		    <scope>compile</scope>
-		</dependency>
+		</dependency>		
+		<dependency>
+		  <groupId>org.snmp4j</groupId>
+		  <artifactId>snmp4j</artifactId>
+		  <version>3.7.7</version>
+		</dependency>		
 	</dependencies>
 
 	<build>

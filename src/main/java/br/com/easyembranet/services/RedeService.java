@@ -25,6 +25,9 @@ public class RedeService {
 
 	@Autowired
 	private EquipamentoRepository equipamentoRepository;
+	
+	@Autowired
+	private EquipamentoService equipamentoService;
 
 	public RedeResponseDto cadastrarRede(RedeRequestDto request) {
 		var novaRede = new Rede();
@@ -43,22 +46,21 @@ public class RedeService {
 
 		List<EquipamentoResponseDto> ipsAtivos = new ArrayList<EquipamentoResponseDto>();
 
-		for (int i = 13; i <= 15; i++) {
+		for (int i = 2; i <= 254; i++) {
 
 			String ip = rede.getRede() + i;
 			try {
 				InetAddress endereco = InetAddress.getByName(ip);
 
 				if (endereco.isReachable(tempoEsperaMs)) {
+					
+					var equipamentoAlcancado = equipamentoService.buscarInformacoes(ip);
+					
 					Equipamento novoEquipamento = new Equipamento();
-					novoEquipamento.setIp(ip);
+					novoEquipamento.setIp(equipamentoAlcancado.getIp());					
 					novoEquipamento.setRede(rede);
 					equipamentoRepository.save(novoEquipamento);
-
-					EquipamentoResponseDto responseEquipamento = new EquipamentoResponseDto();
-					responseEquipamento.setIp(ip);
-					responseEquipamento.setRede(rede.getRede());
-					ipsAtivos.add(responseEquipamento);
+					ipsAtivos.add(equipamentoAlcancado);
 				}
 
 			} catch (Exception e) {

@@ -9,4 +9,9 @@ public class EquipamentoResponseDto {
 
 	private String ip;
 	private String rede;
+	private String mac;
+	private String nomeRadio;
+	private String ssid;
+	private String nivelDeSinal;
+	private String ipDoAp;
 }
