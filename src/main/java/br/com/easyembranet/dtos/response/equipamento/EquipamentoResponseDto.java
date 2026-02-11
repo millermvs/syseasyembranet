@@ -14,4 +14,5 @@ public class EquipamentoResponseDto {
 	private String ssid;
 	private String nivelDeSinal;
 	private String ipDoAp;
+	private String Status;
 }

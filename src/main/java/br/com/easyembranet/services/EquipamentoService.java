@@ -73,9 +73,6 @@ public class EquipamentoService {
 			if(respostaPdu == null)
 				throw new RegraDeNegocioException("Erro ao conectar SNMP do rádio: " + ip);
 			
-			var erro = respostaPdu.getErrorStatus(); // capturar status da requisição
-			System.out.println("erro: " + erro);
-			
 			var response = equipamentoResponseModel.montarRespostaEquipamento(ip, respostaPdu);	
 
 			return response;

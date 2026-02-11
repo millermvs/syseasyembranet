@@ -25,7 +25,7 @@ public class EquipamentoResponseModel {
 		dtoResponse.setSsid(ssid.getVariable().toString());
 		dtoResponse.setNivelDeSinal(nivelDeSinal.getVariable().toString());
 		dtoResponse.setIpDoAp(ipDoAP.getVariable().toString());
-		
+		dtoResponse.setStatus("Ok");
 		return dtoResponse;
 	}
 
