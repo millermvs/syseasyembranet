@@ -5,10 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RedeResponseDto {
+public class IpSendoMapeado {
 
-	private Long idRede;
-	private String rede;
-	private Long totalEquipamentos;
-
+	private String ip;
 }

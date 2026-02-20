@@ -63,8 +63,8 @@ public class EquipamentoService {
 			pdu.add(new VariableBinding(new OID("1.3.6.1.2.1.1.5.0"))); // nome do radio
 			pdu.add(new VariableBinding(new OID("1.3.6.1.4.1.41112.1.4.5.1.2.1"))); // ssid
 			pdu.add(new VariableBinding(new OID("1.3.6.1.4.1.41112.1.4.5.1.5.1"))); // nivel de sinal
-			pdu.add(new VariableBinding(new OID("1.3.6.1.4.1.41112.1.4.7.1.10.1.4.24.214.174.90.169"))); // ip do ap			
-			
+			pdu.add(new VariableBinding(new OID("1.3.6.1.4.1.41112.1.4.1.1.4.1"))); // canal do radio			
+			pdu.add(new VariableBinding(new OID("1.3.6.1.4.1.41112.1.4.5.1.4.1"))); // mac do ap	
 
 			var responsePdu = snmp.get(pdu, target); // envio a pergunta
 

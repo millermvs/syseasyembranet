@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import br.com.easyembranet.exceptions.JaCadastradoException;
 import br.com.easyembranet.exceptions.NaoEncontradoException;
 import br.com.easyembranet.exceptions.RegraDeNegocioException;
 
@@ -32,5 +33,10 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(NaoEncontradoException.class)
 	public ResponseEntity<Object> handlerNaoEncontrado(NaoEncontradoException ex) {
 		return createResponse(HttpStatus.NOT_FOUND, ex);
+	}
+	
+	@ExceptionHandler(JaCadastradoException.class)
+	public ResponseEntity<Object> handlerJaCadastradoException(JaCadastradoException ex) {
+		return createResponse(HttpStatus.CONFLICT, ex);
 	}
 }

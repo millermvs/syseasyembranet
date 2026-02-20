@@ -15,7 +15,8 @@ public class EquipamentoResponseModel {
 		VariableBinding nomeDoRadio = resposta.get(1);
 		VariableBinding ssid = resposta.get(2);
 		VariableBinding nivelDeSinal = resposta.get(3);
-		VariableBinding ipDoAP = resposta.get(4);
+		VariableBinding canalDoRaio = resposta.get(4);
+		VariableBinding macDoAP = resposta.get(5);
 
 		var dtoResponse = new EquipamentoResponseDto();
 		dtoResponse.setIp(ip);
@@ -24,8 +25,9 @@ public class EquipamentoResponseModel {
 		dtoResponse.setNomeRadio(nomeDoRadio.getVariable().toString());
 		dtoResponse.setSsid(ssid.getVariable().toString());
 		dtoResponse.setNivelDeSinal(nivelDeSinal.getVariable().toString());
-		dtoResponse.setIpDoAp(ipDoAP.getVariable().toString());
-		dtoResponse.setStatus("Ok");
+		dtoResponse.setCanalRadio(canalDoRaio.getVariable().toString());
+		dtoResponse.setMacDoAp(macDoAP.getVariable().toString());
+		dtoResponse.setStatus("SUCESSO");
 		return dtoResponse;
 	}
 

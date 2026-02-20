@@ -28,4 +28,25 @@ public class Equipamento {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_rede")
 	private Rede rede;
+	
+	@Column
+	private String mac;
+	
+	@Column
+	private String nomeRadio;
+	
+	@Column
+	private String ssid;
+	
+	@Column
+	private String nivelDeSinal;
+	
+	@Column
+	private String canalRadio;
+	
+	@Column
+	private String macDoAp;
+	
+	@Column
+	private String Status;
 }

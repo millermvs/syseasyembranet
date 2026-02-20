@@ -13,6 +13,7 @@ public class EquipamentoResponseDto {
 	private String nomeRadio;
 	private String ssid;
 	private String nivelDeSinal;
-	private String ipDoAp;
+	private String canalRadio;
+	private String macDoAp;
 	private String Status;
 }
