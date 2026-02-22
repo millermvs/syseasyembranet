@@ -5,6 +5,7 @@ import org.snmp4j.smi.VariableBinding;
 import org.springframework.stereotype.Component;
 
 import br.com.easyembranet.dtos.response.equipamento.EquipamentoResponseDto;
+import br.com.easyembranet.entities.Equipamento;
 
 @Component
 public class EquipamentoResponseModel {
@@ -27,6 +28,20 @@ public class EquipamentoResponseModel {
 		dtoResponse.setNivelDeSinal(nivelDeSinal.getVariable().toString());
 		dtoResponse.setCanalRadio(canalDoRaio.getVariable().toString());
 		dtoResponse.setMacDoAp(macDoAP.getVariable().toString());
+		dtoResponse.setStatus("SUCESSO");
+		return dtoResponse;
+	}
+	
+	public EquipamentoResponseDto montarDtoEquipamento(Equipamento equipamento) {
+		var dtoResponse = new EquipamentoResponseDto();
+		dtoResponse.setIp(equipamento.getIp());
+		dtoResponse.setRede(equipamento.getRede().toString());
+		dtoResponse.setMac(equipamento.getMac());
+		dtoResponse.setNomeRadio(equipamento.getNomeRadio());
+		dtoResponse.setSsid(equipamento.getSsid());
+		dtoResponse.setNivelDeSinal(equipamento.getNivelDeSinal());
+		dtoResponse.setCanalRadio(equipamento.getCanalRadio());
+		dtoResponse.setMacDoAp(equipamento.getMacDoAp());
 		dtoResponse.setStatus("SUCESSO");
 		return dtoResponse;
 	}

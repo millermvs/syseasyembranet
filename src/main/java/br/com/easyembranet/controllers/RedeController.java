@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.easyembranet.dtos.request.rede.RedeRequestDto;
 import br.com.easyembranet.dtos.response.equipamento.EquipamentoResponseDto;
 import br.com.easyembranet.dtos.response.rede.RedeResponseDto;
+import br.com.easyembranet.services.MapearRedeService;
 import br.com.easyembranet.services.RedeService;
 
 @RestController
@@ -25,6 +26,9 @@ public class RedeController {
 
 	@Autowired
 	private RedeService redeService;
+	
+	@Autowired
+	private MapearRedeService mapearRedeService;
 
 	@GetMapping("listar")
 	public ResponseEntity<Page<RedeResponseDto>> getRedes(@RequestParam(defaultValue = "0") Integer page,
@@ -41,7 +45,7 @@ public class RedeController {
 
 	@PostMapping("mapear/{id}")
 	public ResponseEntity<List<EquipamentoResponseDto>> postMapearRedeEnviadaComId(@PathVariable Long id) {
-		var response = redeService.mapearRedeEnviadaComId(id);
+		var response = mapearRedeService.mapearRedeEnviadaComId(id);
 		return ResponseEntity.ok(response);
 	}
 
