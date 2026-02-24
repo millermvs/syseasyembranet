@@ -39,6 +39,27 @@ public class EquipamentoService {
 	@Autowired
 	private RedeService redeService;
 
+	@Transactional
+	public EquipamentoResponseDto editarEquipamento(String id, EquipamentoRequestDto request) {
+		var equipamentoFound = equipamentoRepository.findById(Long.parseLong(id))
+				.orElseThrow(() -> new RegraDeNegocioException("Equipamento não encontrado."));
+
+		
+		equipamentoFound.setCanalRadio(request.getCanalRadio());
+		equipamentoFound.setMac(request.getMac());
+		equipamentoFound.setMacDoAp(request.getMacDoAp());
+		equipamentoFound.setNivelDeSinal(request.getNivelDeSinal());
+		equipamentoFound.setNomeRadio(request.getNomeRadio());
+		equipamentoFound.setRede(equipamentoFound.getRede());
+		equipamentoFound.setSsid(request.getSsid());
+		
+		equipamentoRepository.save(equipamentoFound);
+		
+		var response = equipamentoResponseModel.montarDtoEquipamento(equipamentoFound);
+
+		return response;
+	}
+
 	@Transactional(readOnly = true)
 	public Page<EquipamentoResponseDto> listarEquipamentos(Integer page, Integer size) {
 		var pagleable = PageRequest.of(page, size);

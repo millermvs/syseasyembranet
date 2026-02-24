@@ -34,8 +34,9 @@ public class EquipamentoResponseModel {
 	
 	public EquipamentoResponseDto montarDtoEquipamento(Equipamento equipamento) {
 		var dtoResponse = new EquipamentoResponseDto();
+		dtoResponse.setId(equipamento.getIdEquipamento());
 		dtoResponse.setIp(equipamento.getIp());
-		dtoResponse.setRede(equipamento.getRede().toString());
+		dtoResponse.setRede(equipamento.getRede().getRede());
 		dtoResponse.setMac(equipamento.getMac());
 		dtoResponse.setNomeRadio(equipamento.getNomeRadio());
 		dtoResponse.setSsid(equipamento.getSsid());

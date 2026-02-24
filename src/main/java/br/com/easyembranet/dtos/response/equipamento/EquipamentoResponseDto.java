@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class EquipamentoResponseDto {
 
+	private Long id;
 	private String ip;
 	private String rede;
 	private String mac;

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,13 @@ public class EquipamentosController {
 	@Autowired
 	private EquipamentoService equipamentoService;
 
+	@PutMapping("editar")
+	public ResponseEntity<EquipamentoResponseDto> postEditar(@RequestParam String id,
+			@RequestBody EquipamentoRequestDto request) {
+		var response = equipamentoService.editarEquipamento(id, request);
+		return ResponseEntity.ok(response);
+	}
+
 	@PostMapping("cadastrar")
 	public ResponseEntity<EquipamentoResponseDto> postCadastrar(@RequestBody EquipamentoRequestDto request) {
 		var response = equipamentoService.cadastrarEquipamento(request);
@@ -35,10 +43,9 @@ public class EquipamentosController {
 	}
 
 	@GetMapping("listar")
-	public ResponseEntity<Page<EquipamentoResponseDto>> listarEquipamentos(@RequestParam(defaultValue = "0") Integer page,
-			@RequestParam(defaultValue = "20") Integer size) {
+	public ResponseEntity<Page<EquipamentoResponseDto>> listarEquipamentos(
+			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "20") Integer size) {
 		var response = equipamentoService.listarEquipamentos(page, size);
 		return ResponseEntity.ok(response);
 	}
-
 }
