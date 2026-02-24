@@ -13,6 +13,8 @@ import org.snmp4j.smi.UdpAddress;
 import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +39,33 @@ public class EquipamentoService {
 	@Autowired
 	private RedeService redeService;
 
+	@Transactional(readOnly = true)
+	public Page<EquipamentoResponseDto> listarEquipamentos(Integer page, Integer size) {
+		var pagleable = PageRequest.of(page, size);
+		var pagina = equipamentoRepository.findAll(pagleable);
+		return pagina.map(equipamento -> {
+			var response = equipamentoResponseModel.montarDtoEquipamento(equipamento);
+			return response;
+		});
+	}
+
+	public Boolean verificarSeIpResponde(String ip) {
+		Boolean response;
+
+		try {
+			var pingIp = InetAddress.getByName(ip);
+			int tempoEsperaMs = 1000;
+			if (pingIp.isReachable(tempoEsperaMs)) {
+				response = true;
+			} else {
+				response = false;
+			}
+		} catch (Exception e) {
+			throw new RegraDeNegocioException(e.getMessage());
+		}
+		return response;
+	}
+
 	@Transactional
 	public EquipamentoResponseDto cadastrarEquipamento(EquipamentoRequestDto request) {
 		var equipamentoFound = equipamentoRepository.findByIp(request.getIp());
@@ -45,7 +74,18 @@ public class EquipamentoService {
 			throw new RegraDeNegocioException("Equipamento já cadastrado no sistema.");
 		}
 
-		Rede rede = redeService.consultarRede(request.getIp());
+		var ip = request.getIp();
+		var redeExiste = redeService.redeExiste(ip);
+		Rede rede;
+
+		if (!redeExiste) {
+			RedeRequestDto novaRede = new RedeRequestDto();
+			novaRede.setRede(redeService.converterIpParaRede(ip));
+			redeService.cadastrarRede(novaRede);
+			rede = redeService.consultarRede(ip);
+		} else {
+			rede = redeService.consultarRede(ip);
+		}
 
 		var novoEquipamento = new Equipamento();
 		novoEquipamento.setIp(request.getIp());
@@ -56,6 +96,7 @@ public class EquipamentoService {
 		novoEquipamento.setNomeRadio(request.getNomeRadio());
 		novoEquipamento.setSsid(request.getSsid());
 		novoEquipamento.setRede(rede);
+		equipamentoRepository.save(novoEquipamento);
 
 		EquipamentoResponseDto response = equipamentoResponseModel.montarDtoEquipamento(novoEquipamento);
 
@@ -63,43 +104,31 @@ public class EquipamentoService {
 	}
 
 	public EquipamentoResponseDto buscarInformacoesEquipamentoUnico(String ip) {
-		try {
-			var redeFound = redeService.consultarRede(ip);			
-			var response = buscarInformacoes(ip, redeFound);
+		var pingarIp = verificarSeIpResponde(ip);
+		if (!pingarIp) {
+			throw new RegraDeNegocioException(
+					"O IP " + ip + " não responde ao ping. Verifique se o equipamento está ligado e conectado à rede.");
+		}
+
+		var redeFound = redeService.redeExiste(ip);
+		if (!redeFound) {
+			RedeRequestDto novaRede = new RedeRequestDto();
+			novaRede.setRede(redeService.converterIpParaRede(ip));
+			redeService.cadastrarRede(novaRede);
+			var rede = redeService.consultarRede(ip);
+			var response = buscarInformacoes(ip, rede);
 			return response;
-
-		} catch (Exception e) {
-			// cadastraRede
-			String rede = redeService.converterIpParaRede(ip);
-			var redeFound = redeService.consultarRede(rede);
-			
-			System.out.println("AQUI" + redeFound);
-
-			if (redeFound.equals(null)) {
-				RedeRequestDto novaRede = new RedeRequestDto();
-				novaRede.setRede(rede);
-
-				redeService.cadastrarRede(novaRede);
-				var response = buscarInformacoes(ip, redeFound);
-				return response;
-			} else {
-
-				throw new RegraDeNegocioException(e.getMessage());
-			}
+		} else {
+			var rede = redeService.consultarRede(ip);
+			var response = buscarInformacoes(ip, rede);
+			return response;
 		}
 	}
 
 	public EquipamentoResponseDto buscarInformacoes(String ip, Rede rede) {
-
-		try {
-			var pingIp = InetAddress.getByName(ip);
-			int tempoEsperaMs = 1000;
-			if (!pingIp.isReachable(tempoEsperaMs)) {
-				throw new RegraDeNegocioException("IP não responde.");
-			}
-
-		} catch (Exception e) {
-			throw new RegraDeNegocioException(e.getMessage());
+		var pingarIp = verificarSeIpResponde(ip);
+		if (!pingarIp) {
+			return null;
 		}
 
 		TransportMapping<UdpAddress> canalDeTransporte = null;
