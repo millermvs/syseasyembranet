@@ -17,4 +17,5 @@ public class EquipamentoResponseDto {
 	private String canalRadio;
 	private String macDoAp;
 	private String Status;
+	private String modeloDoRadio;
 }

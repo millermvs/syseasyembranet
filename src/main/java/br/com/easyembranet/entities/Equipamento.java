@@ -49,4 +49,7 @@ public class Equipamento {
 	
 	@Column
 	private String Status;
+
+	@Column
+	private String modeloDoRadio;
 }

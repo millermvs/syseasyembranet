@@ -14,5 +14,6 @@ public class EquipamentoRequestDto {
 	private String nivelDeSinal;
 	private String canalRadio;
 	private String macDoAp;
+	private String modeloDoRadio;
 
 }

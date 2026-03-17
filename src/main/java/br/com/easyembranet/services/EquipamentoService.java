@@ -52,6 +52,7 @@ public class EquipamentoService {
 		equipamentoFound.setNomeRadio(request.getNomeRadio());
 		equipamentoFound.setRede(equipamentoFound.getRede());
 		equipamentoFound.setSsid(request.getSsid());
+		equipamentoFound.setModeloDoRadio(request.getModeloDoRadio());
 		
 		equipamentoRepository.save(equipamentoFound);
 		
@@ -178,6 +179,7 @@ public class EquipamentoService {
 			pdu.add(new VariableBinding(new OID("1.3.6.1.4.1.41112.1.4.5.1.5.1"))); // nivel de sinal
 			pdu.add(new VariableBinding(new OID("1.3.6.1.4.1.41112.1.4.1.1.4.1"))); // canal do radio
 			pdu.add(new VariableBinding(new OID("1.3.6.1.4.1.41112.1.4.5.1.4.1"))); // mac do ap
+			pdu.add(new VariableBinding(new OID("1.2.840.10036.3.1.2.1.3.5"))); // modelo do radio
 
 			var responsePdu = snmp.get(pdu, target); // envio a pergunta
 
@@ -200,6 +202,7 @@ public class EquipamentoService {
 				novoEquipamento.setCanalRadio(response.getCanalRadio());
 				novoEquipamento.setMacDoAp(response.getMacDoAp());
 				novoEquipamento.setStatus(response.getStatus());
+				novoEquipamento.setModeloDoRadio(response.getModeloDoRadio());
 				equipamentoRepository.save(novoEquipamento);
 				return response;
 			} else { // primeiro cria o equipamento pra comparar com o do BD e salvar se nao existir
@@ -213,6 +216,7 @@ public class EquipamentoService {
 				novoEquipamento.setCanalRadio(response.getCanalRadio());
 				novoEquipamento.setMacDoAp(response.getMacDoAp());
 				novoEquipamento.setStatus(response.getStatus());
+				novoEquipamento.setModeloDoRadio(response.getModeloDoRadio());
 
 				// comparar equipamento
 				if (equipamentoFound.get().equals(novoEquipamento)) {
@@ -226,6 +230,7 @@ public class EquipamentoService {
 					equipamento.setNivelDeSinal(novoEquipamento.getNivelDeSinal());
 					equipamento.setCanalRadio(novoEquipamento.getCanalRadio());
 					equipamento.setMacDoAp(novoEquipamento.getMacDoAp());
+					equipamento.setModeloDoRadio(novoEquipamento.getModeloDoRadio());
 					equipamentoRepository.save(equipamento);
 					return response;
 				}

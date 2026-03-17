@@ -18,6 +18,7 @@ public class EquipamentoResponseModel {
 		VariableBinding nivelDeSinal = resposta.get(3);
 		VariableBinding canalDoRaio = resposta.get(4);
 		VariableBinding macDoAP = resposta.get(5);
+		VariableBinding modeloDoRadio = resposta.get(6);
 
 		var dtoResponse = new EquipamentoResponseDto();
 		dtoResponse.setIp(ip);
@@ -28,6 +29,7 @@ public class EquipamentoResponseModel {
 		dtoResponse.setNivelDeSinal(nivelDeSinal.getVariable().toString());
 		dtoResponse.setCanalRadio(canalDoRaio.getVariable().toString());
 		dtoResponse.setMacDoAp(macDoAP.getVariable().toString());
+		dtoResponse.setModeloDoRadio(modeloDoRadio.getVariable().toString());
 		dtoResponse.setStatus("SUCESSO");
 		return dtoResponse;
 	}
@@ -43,6 +45,7 @@ public class EquipamentoResponseModel {
 		dtoResponse.setNivelDeSinal(equipamento.getNivelDeSinal());
 		dtoResponse.setCanalRadio(equipamento.getCanalRadio());
 		dtoResponse.setMacDoAp(equipamento.getMacDoAp());
+		dtoResponse.setModeloDoRadio(equipamento.getModeloDoRadio());
 		dtoResponse.setStatus("SUCESSO");
 		return dtoResponse;
 	}
