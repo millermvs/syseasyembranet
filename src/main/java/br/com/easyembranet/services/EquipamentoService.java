@@ -15,6 +15,7 @@ import org.snmp4j.transport.DefaultUdpTransportMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,7 +64,7 @@ public class EquipamentoService {
 
 	@Transactional(readOnly = true)
 	public Page<EquipamentoResponseDto> listarEquipamentos(Integer page, Integer size) {
-		var pagleable = PageRequest.of(page, size);
+		var pagleable = PageRequest.of(page, size, Sort.by("ip").ascending());
 		var pagina = equipamentoRepository.findAll(pagleable);
 		return pagina.map(equipamento -> {
 			var response = equipamentoResponseModel.montarDtoEquipamento(equipamento);
