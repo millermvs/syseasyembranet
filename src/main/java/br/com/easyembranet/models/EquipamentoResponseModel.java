@@ -10,7 +10,7 @@ import br.com.easyembranet.entities.Equipamento;
 @Component
 public class EquipamentoResponseModel {
 
-	public EquipamentoResponseDto montarRespostaEquipamento(String ip, PDU resposta) {
+	public EquipamentoResponseDto montarRespostaEquipamento(String ip, PDU resposta, String modoWireless) {
 
 		VariableBinding mac = resposta.get(0);
 		VariableBinding nomeDoRadio = resposta.get(1);
@@ -23,6 +23,7 @@ public class EquipamentoResponseModel {
 		var dtoResponse = new EquipamentoResponseDto();
 		dtoResponse.setIp(ip);
 		dtoResponse.setRede(ip);
+		dtoResponse.setModoWireless(modoWireless);
 		dtoResponse.setMac(mac.getVariable().toString());
 		dtoResponse.setNomeRadio(nomeDoRadio.getVariable().toString());
 		dtoResponse.setSsid(ssid.getVariable().toString());
@@ -39,6 +40,7 @@ public class EquipamentoResponseModel {
 		dtoResponse.setId(equipamento.getIdEquipamento());
 		dtoResponse.setIp(equipamento.getIp());
 		dtoResponse.setRede(equipamento.getRede().getRede());
+		dtoResponse.setModoWireless(equipamento.getRede().getModoWireless());
 		dtoResponse.setMac(equipamento.getMac());
 		dtoResponse.setNomeRadio(equipamento.getNomeRadio());
 		dtoResponse.setSsid(equipamento.getSsid());

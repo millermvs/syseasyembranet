@@ -9,6 +9,7 @@ public class RedeResponseDto {
 
 	private Long idRede;
 	private String rede;
+	private String modoWireless;
 	private Long totalEquipamentos;
 
 }

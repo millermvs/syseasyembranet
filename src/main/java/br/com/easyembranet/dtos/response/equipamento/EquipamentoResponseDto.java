@@ -10,6 +10,7 @@ public class EquipamentoResponseDto {
 	private Long id;
 	private String ip;
 	private String rede;
+	private String modoWireless;
 	private String mac;
 	private String nomeRadio;
 	private String ssid;

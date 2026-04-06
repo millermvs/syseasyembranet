@@ -26,11 +26,12 @@ public interface RedeRepository extends JpaRepository<Rede, Long> {
 	@Query("""
 		    SELECT r.idRede as idRede,
 		           r.rede as rede,
+		           r.modoWireless as modoWireless,
 		           COUNT(e) as totalEquipamentos
 		    FROM Rede r
 		    LEFT JOIN r.equipamentos e
-		    GROUP BY r.idRede, r.rede
+		    GROUP BY r.idRede, r.rede, r.modoWireless
 		""")
-		Page<RedeResumoProjection> findAllComTotal(Pageable pageable);
+	Page<RedeResumoProjection> findAllComTotal(Pageable pageable);
 
 }

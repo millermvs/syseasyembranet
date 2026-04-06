@@ -189,7 +189,7 @@ public class EquipamentoService {
 			if (respostaPdu == null)
 				throw new RegraDeNegocioException("Erro ao conectar SNMP do rádio: " + ip);
 
-			var response = equipamentoResponseModel.montarRespostaEquipamento(ip, respostaPdu);
+			var response = equipamentoResponseModel.montarRespostaEquipamento(ip, respostaPdu, rede.getModoWireless());
 
 			var equipamentoFound = equipamentoRepository.findByIp(ip);
 			if (equipamentoFound.isEmpty()) {

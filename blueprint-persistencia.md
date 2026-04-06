@@ -11,12 +11,14 @@
 
 ### Tabela: `redes`
 Entidade: `Rede`
-| Campo       | Tipo   | Notas                                       |
-|-------------|--------|---------------------------------------------|
-| `id_rede`   | Long   | PK, gerado por sequence                     |
-| `rede`      | String | Endereço de rede (ex: "192.168.1.0")        |
+| Campo            | Tipo   | Notas                                            |
+|------------------|--------|--------------------------------------------------|
+| `id_rede`        | Long   | PK, gerado por sequence                          |
+| `rede`           | String | Endereço de rede (ex: "192.168.1.0")             |
+| `modo_wireless`  | String | Modo (ex: "AP" ou "STATION") - **IMUTÁVEL**     |
 
 - Possui `@OneToMany(mappedBy = "rede")` apontando para `Equipamento` (usado para contagem e validação de exclusão).
+- Campo `modo_wireless`: definido **uma única vez** no cadastro da rede; após criar, não pode ser alterado (`@Column(updatable = false)`).
 
 ### Tabela: `equipamentos`
 Entidade: `Equipamento`
@@ -62,5 +64,7 @@ Entidade: `Equipamento`
 ### `RedeResumoProjection` (interface)
 - `Long getIdRede()`
 - `String getRede()`
+- `String getModoWireless()` — **novo**
 - `Long getTotalEquipamentos()`
-Usada na listagem de redes para evitar carregar a coleção `@OneToMany` desnecessariamente.
+
+Usada na listagem de redes para evitar carregar a coleção `@OneToMany` desnecessariamente. Traz o modo imutável junto com o resumo da rede.

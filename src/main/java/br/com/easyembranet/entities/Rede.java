@@ -24,8 +24,11 @@ public class Rede {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long idRede;
 
-	@Column
+	@Column(nullable = false)
 	private String rede;
+
+	@Column(name = "modo_wireless", nullable = false, updatable = false)
+	private String modoWireless;
 
 	@OneToMany(mappedBy = "rede", fetch = FetchType.LAZY)
 	private Set<Equipamento> equipamentos = new HashSet<Equipamento>();

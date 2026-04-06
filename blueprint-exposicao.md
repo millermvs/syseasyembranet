@@ -1,5 +1,12 @@
 # Lógica de Exposição (Services & Controllers)
 
+## Conceito: Herança de Contexto (Context Inheritance)
+A partir da v2.0, o campo `modoWireless` foi movido da entidade `Equipamento` para a entidade `Rede`.
+**Raciocínio:** Cada rede tem um único modo (AP ou STATION). Todos os equipamentos que nela existem automaticamente herdam esse modo.
+Assim, eliminamos redundância de dados (não repetir "AP" 254 vezes) e garantimos integridade semântica.
+
+**Imutabilidade:** Uma rede criada como "AP" não muda para "STATION". O campo tem `@Column(updatable = false)`.
+
 ## Transacionalidade
 - `@Transactional(readOnly = true)` para listagens e buscas (GET).
 - `@Transactional` para CRUD e varredura SNMP.
@@ -29,7 +36,9 @@
 ## RedeService
 
 ### `cadastrarRede(RedeRequestDto)`
+Recebe `rede` (endereço) e `modoWireless` (AP ou STATION).
 Verifica duplicidade pelo campo `rede`. Lança `JaCadastradoException` se já existir.
+Persiste ambos os campos. **Atenção:** `modoWireless` é imutável (`@Column(updatable = false)`) — após criada, a rede não muda de modo.
 
 ### `deletarRede(Long id)`
 Verifica se a rede possui equipamentos vinculados (`!getEquipamentos().isEmpty()`).

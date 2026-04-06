@@ -45,6 +45,7 @@ public class RedeService {
 			var dtoResposta = new RedeResponseDto();
 			dtoResposta.setIdRede(rede.getIdRede());
 			dtoResposta.setRede(rede.getRede());
+			dtoResposta.setModoWireless(rede.getModoWireless());
 			dtoResposta.setTotalEquipamentos(rede.getTotalEquipamentos());
 			return dtoResposta;
 		});
@@ -60,10 +61,13 @@ public class RedeService {
 
 		var novaRede = new Rede();
 		novaRede.setRede(request.getRede());
+		novaRede.setModoWireless(request.getModoWireless());
 		redeRepository.save(novaRede);
 
 		var response = new RedeResponseDto();
+		response.setIdRede(novaRede.getIdRede());
 		response.setRede(novaRede.getRede());
+		response.setModoWireless(novaRede.getModoWireless());
 		return response;
 	}
 
