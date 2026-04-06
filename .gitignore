@@ -1,5 +1,31 @@
-# Maven
+# ===================================
+# BUILD & DEPENDENCY MANAGEMENT
+# ===================================
 /target/
+/build/
+/dist/
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+release.properties
+.flattened-pom.xml
+.maven-wrapper/
+
+# Gradle (if future migration)
+.gradle/
+/build/
+gradle-app.setting
+gradlew.bat
+
+# ===================================
+# IDE & EDITOR
+# ===================================
 
 # Eclipse / STS
 .classpath
@@ -9,12 +35,133 @@
 .apt_generated
 .springBeans
 .sts4-cache
+bin/
+.texlipse
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.DS_Store
 
 # VS Code
 .vscode/
+*.code-workspace
 
-# Logs
-*.log
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+.nb-gradle/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ===================================
+# OPERATING SYSTEM
+# ===================================
 
 # Windows
 Thumbs.db
+Desktop.ini
+.Spotlight-V100
+.Trashes
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+.directory
+.nfs*
+
+# ===================================
+# LOGGING & TEMPORARY
+# ===================================
+
+# Logs
+*.log
+*.log.*
+logs/
+log/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+.~*
+
+# ===================================
+# ENVIRONMENT & CONFIGURATION
+# ===================================
+
+# Environment variables (NUNCA commitar credenciais!)
+.env
+.env.local
+.env.*.local
+application-local.properties
+application-dev.properties
+
+# Database (se usar H2 ou SQLite localmente)
+*.h2.db
+*.sqlite
+*.db
+
+# ===================================
+# SPRING BOOT & APPLICATION
+# ===================================
+
+# Spring Boot
+/bin/
+HELP.md
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+mvn.cmd
+
+# Generated files
+/src/main/resources/static/**
+!/src/main/resources/static/.gitkeep
+/src/main/resources/templates/**
+!/src/main/resources/templates/.gitkeep
+
+# Swagger/OpenAPI gerado
+/api-docs/
+openapi.json
+swagger-ui.html
+
+# ===================================
+# TESTING
+# ===================================
+
+# Test coverage
+/coverage/
+*.coverage
+.nyc_output/
+htmlcov/
+
+# ===================================
+# NODE & FRONTEND (future-proofing)
+# ===================================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+.eslintcache
+
+# ===================================
+# MISC
+# ===================================
+
+# Custom local files
+.custom-local/
+secrets/
+config.local/

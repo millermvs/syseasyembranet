@@ -1,0 +1,114 @@
+# ===================================
+# GIT & VERSION CONTROL
+# ===================================
+.git/
+.gitignore
+.gitattributes
+.github/
+
+# ===================================
+# IDE & EDITOR
+# ===================================
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+.eclipse/
+.settings/
+.classpath
+.project
+*.swp
+*.swo
+*~
+
+# ===================================
+# BUILD & ARTIFACTS (será reconstruído)
+# ===================================
+/target/
+/build/
+/dist/
+*.jar
+*.war
+*.ear
+.mvn/
+mvnw
+mvnw.cmd
+
+# ===================================
+# DOCUMENTATION & EXTRAS
+# ===================================
+README.md
+LICENSE
+CHANGELOG.md
+docs/
+*.md
+
+# ===================================
+# OPERATING SYSTEM
+# ===================================
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+Desktop.ini
+.directory
+.nfs*
+
+# ===================================
+# LOGS & TEMPORARY
+# ===================================
+*.log
+*.log.*
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
+
+# ===================================
+# ENVIRONMENT & SECRETS
+# ===================================
+.env
+.env.local
+.env.*.local
+application-local.properties
+application-dev.properties
+secrets/
+
+# ===================================
+# NODE & FRONTEND (se existir)
+# ===================================
+node_modules/
+npm-debug.log
+yarn-error.log
+.npm/
+dist/
+
+# ===================================
+# CI/CD & TESTING
+# ===================================
+.github/
+.gitlab-ci.yml
+.travis.yml
+Jenkinsfile
+/coverage/
+*.coverage
+.nyc_output/
+
+# ===================================
+# DOCKER & KUBERNETES
+# ===================================
+Dockerfile
+docker-compose.yml
+docker-compose.override.yml
+.dockerignore
+k8s/
+
+# ===================================
+# MISC
+# ===================================
+.custom-local/
+config.local/
+*.zip
+*.gz
